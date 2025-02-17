@@ -1,0 +1,24 @@
+.env
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore master_key
+/config/master.key
+
+# Hidden configuration folder specific to the user
+.bundle
+
+# PID files and cache
+*.pid
+*.pid.lock
+/tmp/pids/*
+/tmp/cache/*
+/tmp/sockets/*
+
+# Credentials and secret keys
+/config/master.key
+/config/credentials.yml.enc
