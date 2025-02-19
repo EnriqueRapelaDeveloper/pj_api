@@ -23,6 +23,13 @@ Rails.application.routes.draw do
       namespace :selects do
         get :product_kinds
       end
+      resources :orders, param: :uuid, only: [:create, :update, :show] do
+        member do
+          post :pay
+          post :deliver
+          post :cancel
+        end
+      end
     end
   end
 end
