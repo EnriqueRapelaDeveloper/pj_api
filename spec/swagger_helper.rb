@@ -4,6 +4,7 @@ require 'rails_helper'
 
 store_schema = YAML.load_file(Rails.root.join('spec/schemas/store.yml'))
 generic_error_schema = YAML.load_file(Rails.root.join('spec/schemas/generic_error.yml'))
+product_schema = YAML.load_file(Rails.root.join('spec/schemas/product.yml'))
 
 RSpec.configure do |config|
   # Specify a root folder where Swagger JSON files are generated
@@ -29,7 +30,10 @@ RSpec.configure do |config|
           stores: store_schema.dig('stores'),
           create_store: store_schema.dig('create_store'),
           store: store_schema.dig('store'),
-          generic_error: generic_error_schema.dig('generic_error')
+          generic_error: generic_error_schema.dig('generic_error'),
+          products: product_schema.dig('products'),
+          create_product: product_schema.dig('create_product'),
+          product: product_schema.dig('product')
         }
       },
       paths: {},
