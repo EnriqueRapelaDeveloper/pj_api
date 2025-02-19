@@ -22,3 +22,6 @@
 # Credentials and secret keys
 /config/master.key
 /config/credentials.yml.enc
+
+# Coverage
+coverage/

@@ -43,11 +43,20 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "dotenv-rails"
+
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 
