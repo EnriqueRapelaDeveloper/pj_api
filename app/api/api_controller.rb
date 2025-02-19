@@ -10,4 +10,8 @@ class ApiController < ApplicationController
   rescue_from ArgumentError do |e|
     render json: { error_code: 'invalid_params', description: e.message }, status: 422
   end
+
+  rescue_from ActiveRecord::AssociationTypeMismatch do |e|
+    render json: { error_code: 'invalid_params', description: e.message }, status: 422
+  end
 end
