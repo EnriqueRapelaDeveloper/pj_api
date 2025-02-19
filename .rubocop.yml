@@ -1,1 +1,29 @@
 inherit_from: .rubocop_todo.yml
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/schema.rb'
+
+Style/KeywordParametersOrder:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 3.0
+
+Metrics/AbcSize:
+  Enabled: false
+  Include:
+    - 'app/api/v1/*'

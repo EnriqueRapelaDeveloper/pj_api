@@ -10,8 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_18_224538) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "street", null: false
+    t.integer "number", null: false
+    t.string "letter"
+    t.integer "postal_code", null: false
+    t.string "country", null: false
+    t.string "city", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.string "phone", null: false
+    t.string "email", default: "kevin.fernandez@pjchile.com", null: false
+    t.bigint "address_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_stores_on_address_id"
+  end
 end
