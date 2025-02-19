@@ -200,6 +200,13 @@ components:
         updated_at:
           type: datetime
           example: Updated at of the product
+    assign_products:
+      type: object
+      properties:
+        product_uuids:
+          type: string
+          example: Product_uuid1,Product_uuid2,Product_uuid3
+          description: Product uuids to assign separated by commas
 paths:
   "/api/v1/products":
     get:
@@ -421,6 +428,110 @@ paths:
       responses:
         '204':
           description: successful
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+  "/api/v1/stores/{uuid}/assign_products":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: assign products to store
+      tags:
+      - Stores
+      description: Assign products to a store
+      operationId: assignProductsToStore
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/store"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/assign_products"
+        required: true
+  "/api/v1/stores/{uuid}/unassign_products":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: unassign products from store
+      tags:
+      - Stores
+      description: Unassign products from a store
+      operationId: unassignProductsFromStore
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/store"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/assign_products"
+        required: true
+  "/api/v1/stores/{uuid}/products":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show products of store
+      tags:
+      - Stores
+      description: See the products of a store
+      operationId: showProductsOfStore
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/products"
         '404':
           description: not found
           content:

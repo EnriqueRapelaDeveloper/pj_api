@@ -33,7 +33,8 @@ RSpec.configure do |config|
           generic_error: generic_error_schema.dig('generic_error'),
           products: product_schema.dig('products'),
           create_product: product_schema.dig('create_product'),
-          product: product_schema.dig('product')
+          product: product_schema.dig('product'),
+          assign_products: store_schema.dig('assign_products')
         }
       },
       paths: {},

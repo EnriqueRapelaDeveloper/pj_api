@@ -171,4 +171,140 @@ RSpec.describe 'api/v1/stores', type: :request do
       end
     end 
   end
+
+  path '/api/v1/stores/{uuid}/assign_products' do
+    parameter name: :uuid, :in => :path, :type => :string
+
+    post('assign products to store') do
+      tags 'Stores'
+      description 'Assign products to a store'
+      operationId 'assignProductsToStore'
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :product_uuids, in: :body, required: true,
+                schema: { '$ref' => '#/components/schemas/assign_products' }
+
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/store'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => { 
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(422, 'invalid request') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end 
+    end
+  end 
+
+  path '/api/v1/stores/{uuid}/unassign_products' do
+    parameter name: :uuid, :in => :path, :type => :string
+
+    delete('unassign products from store') do
+      tags 'Stores'
+      description 'Unassign products from a store'
+      operationId 'unassignProductsFromStore'
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :product_uuids, in: :body, required: true,
+                schema: { '$ref' => '#/components/schemas/assign_products' }
+
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/store'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(422, 'invalid request') do
+        schema '$ref' => '#/components/schemas/generic_error' 
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          } 
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/stores/{uuid}/products' do
+    parameter name: :uuid, :in => :path, :type => :string
+
+    get('show products of store') do
+      tags 'Stores'
+      description 'See the products of a store' 
+      operationId 'showProductsOfStore'
+      consumes 'application/json'
+      produces 'application/json'
+
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/products'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          } 
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error' 
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          } 
+        end
+        run_test!
+      end
+    end
+  end
 end

@@ -109,4 +109,10 @@ store:
     updated_at:
       type: string
       example: 'Updated at of the store'
-
+assign_products:
+  type: object
+  properties:
+    product_uuids:
+      type: string
+      example: 'Product_uuid1,Product_uuid2,Product_uuid3'
+      description: 'Product uuids to assign separated by commas'

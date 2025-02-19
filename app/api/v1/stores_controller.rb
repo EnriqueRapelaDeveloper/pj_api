@@ -1,6 +1,6 @@
 module V1
   class StoresController < ApiController
-    before_action :set_store, only: [:show, :destroy, :update]
+    before_action :set_store, only: [:show, :destroy, :update, :assign_products, :unassign_products, :products]
     def index
       render json: StoreBlueprint.render(Store.all)
     end
@@ -42,6 +42,22 @@ module V1
       @store.destroy
 
       render json: { message: 'Tienda eliminada correctamente' }, status: :no_content
+    end
+
+    def assign_products
+      ::Stores::AssignProducts.execute(store: @store, product_uuids: params[:product_uuids])
+
+      render json: StoreBlueprint.render(@store), status: :ok
+    end
+
+    def unassign_products
+      ::Stores::UnassignProducts.execute(store: @store, product_uuids: params[:product_uuids])
+
+      render json: StoreBlueprint.render(@store), status: :ok
+    end
+
+    def products
+      render json: ProductBlueprint.render(@store.products)
     end
 
     private
