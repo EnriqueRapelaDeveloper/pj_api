@@ -3,7 +3,7 @@ stores:
   items:
     type: object
     properties:
-      uid:
+      uuid:
         type: string
         example: 'Identifier of the store'
         description: 'Unique identifier of the store'
@@ -73,6 +73,9 @@ create_store:
 store:
   type: object
   properties:
+    uuid:
+      type: string
+      example: 'Identifier of the store'
     name:
       type: string
       example: 'Name of the store'

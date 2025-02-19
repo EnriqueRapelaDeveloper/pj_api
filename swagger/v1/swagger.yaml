@@ -10,7 +10,7 @@ components:
       items:
         type: object
         properties:
-          uid:
+          uuid:
             type: string
             example: Identifier of the store
             description: Unique identifier of the store
@@ -80,6 +80,9 @@ components:
     store:
       type: object
       properties:
+        uuid:
+          type: string
+          example: Identifier of the store
         name:
           type: string
           example: Name of the store
@@ -122,7 +125,195 @@ components:
         description:
           type: string
           example: Error description
+    products:
+      type: array
+      items:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: Identifier of the product
+            description: Unique identifier of the product
+          name:
+            type: string
+            example: Name of the product
+          sku:
+            type: string
+            example: SKU of the product
+          kind:
+            type: string
+            example: Kind of the product
+          price:
+            type: string
+            example: Price of the product
+          description:
+            type: string
+            example: Description of the product
+          created_at:
+            type: datetime
+            example: Created at of the product
+          updated_at:
+            type: datetime
+            example: Updated at of the product
+    create_product:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Name of the product
+        sku:
+          type: string
+          example: SKU of the product
+        kind:
+          type: string
+          example: Kind of the product
+        price:
+          type: string
+          example: Price of the product
+        description:
+          type: string
+          example: Description of the product
+    product:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: Identifier of the product
+        name:
+          type: string
+          example: Name of the product
+        sku:
+          type: string
+          example: SKU of the product
+        kind:
+          type: string
+          example: Kind of the product
+        price:
+          type: string
+          example: Price of the product
+        description:
+          type: string
+          example: Description of the product
+        created_at:
+          type: datetime
+          example: Created at of the product
+        updated_at:
+          type: datetime
+          example: Updated at of the product
 paths:
+  "/api/v1/products":
+    get:
+      summary: show products
+      tags:
+      - Products
+      description: See products
+      operationId: showProducts
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/products"
+    post:
+      summary: create product
+      tags:
+      - Products
+      description: Create a product
+      operationId: createProduct
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/product"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_product"
+        required: true
+  "/api/v1/products/{uuid}":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show product
+      tags:
+      - Products
+      description: See a product
+      operationId: showProduct
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/product"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+    put:
+      summary: update product
+      tags:
+      - Products
+      description: Update a product
+      operationId: updateProduct
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/product"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_product"
+        required: true
+    delete:
+      summary: delete product
+      tags:
+      - Products
+      description: Delete a product
+      operationId: deleteProduct
+      responses:
+        '204':
+          description: successful
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
   "/api/v1/stores":
     get:
       summary: show stores

@@ -1,0 +1,76 @@
+products:
+  type: array
+  items:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: 'Identifier of the product'
+        description: 'Unique identifier of the product'
+      name:
+        type: string
+        example: 'Name of the product'
+      sku:
+        type: string
+        example: 'SKU of the product'
+      kind:
+        type: string
+        example: 'Kind of the product'
+      price:
+        type: string
+        example: 'Price of the product'
+      description:
+        type: string
+        example: 'Description of the product'
+      created_at:
+        type: datetime
+        example: 'Created at of the product'
+      updated_at:
+        type: datetime
+        example: 'Updated at of the product'
+create_product:
+  type: object
+  properties:
+    name:
+      type: string
+      example: 'Name of the product'
+    sku:
+      type: string
+      example: 'SKU of the product'
+    kind:
+      type: string
+      example: 'Kind of the product'
+    price:
+      type: string
+      example: 'Price of the product'
+    description:
+      type: string
+      example: 'Description of the product'
+product:
+  type: object
+  properties:
+    uuid:
+      type: string
+      example: 'Identifier of the product'
+    name:
+      type: string
+      example: 'Name of the product'
+    sku:
+      type: string
+      example: 'SKU of the product'
+    kind:
+      type: string
+      example: 'Kind of the product'
+    price:
+      type: string
+      example: 'Price of the product'
+    description:
+      type: string
+      example: 'Description of the product'
+    created_at:
+      type: datetime
+      example: 'Created at of the product'
+    updated_at:
+      type: datetime
+      example: 'Updated at of the product'
+
