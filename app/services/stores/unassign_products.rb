@@ -12,7 +12,11 @@ module Stores
 
           raise ActiveRecord::AssociationTypeMismatch, "Producto no encontrado con UUID: #{product_uuid.strip}" if product.nil?
 
-          StoreProduct.find_by(store: @store, product: product).destroy
+          relationship = StoreProduct.find_by(store: @store, product: product)
+
+          raise ActiveRecord::AssociationTypeMismatch, "Relación no encontrada entre la tienda y el producto: #{product_uuid.strip}" if relationship.nil?
+
+          relationship.destroy
         end
       end
     end
