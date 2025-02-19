@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   scope 'api' do
     namespace :v1 do
-      resources :stores, param: :uuid, only: [:index, :create, :show, :destroy, :update]
+      resources :stores, param: :uuid
+      resources :products, param: :uuid
+      namespace :selects do
+        get :product_kinds
+      end
     end
   end
 end

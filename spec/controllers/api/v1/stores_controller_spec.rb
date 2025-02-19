@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Stores API", type: :request do
+RSpec.describe V1::StoresController, type: :request do
   describe "GET /api/v1/stores" do
     before do
       create_list(:store, 3)

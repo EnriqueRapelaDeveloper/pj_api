@@ -11,7 +11,7 @@ module Products
 
     def execute
       Product.transaction do
-        @product.update!(name: @name, sku: @sku, kind: @kind, price: @price, description: @description)
+        @product.update!(name: @name, sku: @sku, kind: @kind.to_i, price: @price, description: @description)
 
         @product
       end

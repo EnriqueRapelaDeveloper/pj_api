@@ -12,7 +12,7 @@ module Products
       Product.transaction do
         product = Product.create!(name: @name,
                                   sku: @sku,
-                                  kind: @kind,
+                                  kind: @kind.to_i,
                                   price: @price,
                                   description: @description)
 

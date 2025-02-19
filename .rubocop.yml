@@ -26,6 +26,7 @@ AllCops:
     - 'spec/*'
     - 'spec/**/*'
     - 'config/initializers/*'
+    - 'db/**/*'
 
 Metrics/AbcSize:
   Enabled: false
