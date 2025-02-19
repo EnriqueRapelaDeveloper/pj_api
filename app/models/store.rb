@@ -7,6 +7,7 @@ class Store < ApplicationRecord
   before_validation :set_default_email
 
   validates :name, uniqueness: { scope: [:phone], message: "Ya existe una tienda con el mismo nombre y teléfono" }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "El correo electrónico no es válido" }
 
   private
 

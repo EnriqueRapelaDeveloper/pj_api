@@ -22,6 +22,10 @@ Lint/MissingSuper:
 
 AllCops:
   TargetRubyVersion: 3.0
+  Exclude:
+    - 'spec/*'
+    - 'spec/**/*'
+    - 'config/initializers/*'
 
 Metrics/AbcSize:
   Enabled: false

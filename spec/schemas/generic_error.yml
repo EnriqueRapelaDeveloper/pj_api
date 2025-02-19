@@ -1,0 +1,9 @@
+generic_error:
+  type: object
+  properties:
+    error_code:
+      type: string
+      example: 'Error code'
+    description:
+      type: string
+      example: 'Error description'

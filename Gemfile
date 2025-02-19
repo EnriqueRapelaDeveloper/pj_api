@@ -32,6 +32,10 @@ gem "bootsnap", require: false
 # Blueprinter for JSON responses
 gem 'blueprinter'
 
+# Rswag for API documentation
+gem 'rswag-api'
+gem 'rswag-ui'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -43,6 +47,11 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "dotenv-rails"
+
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'rswag-specs'
 end
 
 group :development do
@@ -50,4 +59,7 @@ group :development do
   gem 'rubocop-rails', require: false
 end
 
-
+group :test do
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+end

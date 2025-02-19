@@ -1,0 +1,109 @@
+stores:
+  type: array
+  items:
+    type: object
+    properties:
+      uid:
+        type: string
+        example: 'Identifier of the store'
+        description: 'Unique identifier of the store'
+      name:
+        type: string
+        example: 'Name of the store'
+      phone:
+        type: string
+        example: 'Phone of the store'
+      email:
+        type: string
+        example: 'Email of the store'
+      street:
+        type: string
+        example: 'Street of the store'
+      number:
+        type: string
+        example: 'Number of the store'
+      letter:
+        type: string
+        example: 'Letter of the store'
+      postal_code:
+        type: string
+        example: 'Postal code of the store'
+      country:
+        type: string
+        example: 'Country of the store'
+      city:
+        type: string
+        example: 'City of the store'
+      created_at:
+        type: string
+        example: 'Created at of the store'
+      updated_at:
+        type: string
+        example: 'Updated at of the store'
+create_store:
+  type: object
+  properties:
+    name:
+      type: string
+      example: 'Name of the store'
+    phone:
+      type: string
+      example: 'Phone of the store'
+    email:
+      type: string
+      example: 'Email of the store'
+    street:
+      type: string
+      example: 'Street of the store'    
+    number:
+      type: string
+      example: 'Number of the store'
+    letter:
+      type: string
+      example: 'Letter of the store'
+    postal_code:
+      type: string
+      example: 'Postal code of the store'
+    country:
+      type: string
+      example: 'Country of the store'
+    city:
+      type: string
+      example: 'City of the store'
+store:
+  type: object
+  properties:
+    name:
+      type: string
+      example: 'Name of the store'
+    phone:
+      type: string
+      example: 'Phone of the store'
+    email:
+      type: string
+      example: 'Email of the store'
+    street:
+      type: string
+      example: 'Street of the store'
+    number:
+      type: string
+      example: 'Number of the store'
+    letter:
+      type: string
+      example: 'Letter of the store'
+    postal_code:
+      type: string
+      example: 'Postal code of the store'
+    country:
+      type: string
+      example: 'Country of the store'
+    city:
+      type: string
+      example: 'City of the store'
+    created_at:
+      type: string
+      example: 'Created at of the store'
+    updated_at:
+      type: string
+      example: 'Updated at of the store'
+

@@ -16,7 +16,7 @@ module V1
                                        country: params[:country],
                                        city: params[:city])
 
-      render json: StoreBlueprint.render(store)
+      render json: StoreBlueprint.render(store), status: :created
     end
 
     def show
@@ -41,7 +41,7 @@ module V1
     def destroy
       @store.destroy
 
-      render json: { message: 'Tienda eliminada correctamente' }
+      render json: { message: 'Tienda eliminada correctamente' }, status: :no_content
     end
 
     private
