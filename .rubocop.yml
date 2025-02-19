@@ -25,6 +25,7 @@ AllCops:
   Exclude:
     - 'spec/*'
     - 'spec/**/*'
+    - 'config/initializers/*'
 
 Metrics/AbcSize:
   Enabled: false

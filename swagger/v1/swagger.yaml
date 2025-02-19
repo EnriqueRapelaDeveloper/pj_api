@@ -1,0 +1,241 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  schemas:
+    stores:
+      type: array
+      items:
+        type: object
+        properties:
+          uid:
+            type: string
+            example: Identifier of the store
+            description: Unique identifier of the store
+          name:
+            type: string
+            example: Name of the store
+          phone:
+            type: string
+            example: Phone of the store
+          email:
+            type: string
+            example: Email of the store
+          street:
+            type: string
+            example: Street of the store
+          number:
+            type: string
+            example: Number of the store
+          letter:
+            type: string
+            example: Letter of the store
+          postal_code:
+            type: string
+            example: Postal code of the store
+          country:
+            type: string
+            example: Country of the store
+          city:
+            type: string
+            example: City of the store
+          created_at:
+            type: string
+            example: Created at of the store
+          updated_at:
+            type: string
+            example: Updated at of the store
+    create_store:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Name of the store
+        phone:
+          type: string
+          example: Phone of the store
+        email:
+          type: string
+          example: Email of the store
+        street:
+          type: string
+          example: Street of the store
+        number:
+          type: string
+          example: Number of the store
+        letter:
+          type: string
+          example: Letter of the store
+        postal_code:
+          type: string
+          example: Postal code of the store
+        country:
+          type: string
+          example: Country of the store
+        city:
+          type: string
+          example: City of the store
+    store:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Name of the store
+        phone:
+          type: string
+          example: Phone of the store
+        email:
+          type: string
+          example: Email of the store
+        street:
+          type: string
+          example: Street of the store
+        number:
+          type: string
+          example: Number of the store
+        letter:
+          type: string
+          example: Letter of the store
+        postal_code:
+          type: string
+          example: Postal code of the store
+        country:
+          type: string
+          example: Country of the store
+        city:
+          type: string
+          example: City of the store
+        created_at:
+          type: string
+          example: Created at of the store
+        updated_at:
+          type: string
+          example: Updated at of the store
+    generic_error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          example: Error code
+        description:
+          type: string
+          example: Error description
+paths:
+  "/api/v1/stores":
+    get:
+      summary: show stores
+      tags:
+      - Stores
+      description: See stores
+      operationId: showStores
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/stores"
+    post:
+      summary: create store
+      tags:
+      - Stores
+      description: Create a store
+      operationId: createStore
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/store"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_store"
+        required: true
+  "/api/v1/stores/{uuid}":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show store
+      tags:
+      - Stores
+      description: See a store
+      operationId: showStore
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/store"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+    put:
+      summary: update store
+      tags:
+      - Stores
+      description: Update a store
+      operationId: updateStore
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/store"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_store"
+        required: true
+    delete:
+      summary: delete store
+      tags:
+      - Stores
+      description: Delete a store
+      operationId: deleteStore
+      responses:
+        '204':
+          description: successful
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+servers:
+- url: http://localhost:3000
+- url: https://pj-api-staging.onrender.com

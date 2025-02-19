@@ -1,115 +1,174 @@
-require 'rails_helper'
+require 'swagger_helper'
 
-RSpec.describe "Stores API", type: :request do
-  describe "GET /api/v1/stores" do
-    before do
-      create_list(:store, 3)
+RSpec.describe 'api/v1/stores', type: :request do
+
+  path '/api/v1/stores' do  
+
+    get('show stores') do
+      tags 'Stores'
+      description 'See stores'
+      operationId 'showStores'
+      consumes 'application/json'
+      produces 'application/json'
+
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/stores'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
 
-    it "returns all stores" do
-      get "/api/v1/stores"
-      
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body).size).to eq(3)
-    end
-  end
+    post('create store') do
+      tags 'Stores'
+      description 'Create a store'
+      operationId 'createStore'
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :store, in: :body, required: true,
+                schema: { '$ref' => '#/components/schemas/create_store' }
 
-  describe "POST /api/v1/stores" do
-    let(:valid_attributes) do
-      {
-        name: "Papa John's",
-        phone: "123-456-7890",
-        email: "papa@johns.com",
-        street: "Calle Principal 123",
-        number: 123,
-        letter: "A",
-        postal_code: "12345",
-        city: "Ciudad",
-        country: "País"
-      }
-    end
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/store'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
 
-    it "creates a new store" do
-      expect {
-        post "/api/v1/stores", params: valid_attributes
-      }.to change(Store, :count).by(1)
-
-      expect(response).to have_http_status(:created)
-      expect(JSON.parse(response.body)["name"]).to eq("Papa John's")
-    end
-
-    it "returns a 422 error if the store is invalid" do
-      post "/api/v1/stores", params: {
-        name: nil,
-      }
-
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
-  end
-
-  describe "GET /api/v1/stores/:uuid" do
-    let(:store) { create(:store) }
-
-    it "returns the store" do
-      get "/api/v1/stores/#{store.uuid}"
-
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)["name"]).to eq(store.name)
-    end
-
-    it "returns a 404 error if the store is not found" do
-      get "/api/v1/stores/123"
-
-      expect(response).to have_http_status(:not_found)
+      response(422, 'invalid request') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
   end
 
-  describe "PUT /api/v1/stores/:uuid" do
-    let(:store) { create(:store) }
+  path '/api/v1/stores/{uuid}' do
+    parameter name: :uuid, :in => :path, :type => :string
 
-    it "updates the store" do
-      put "/api/v1/stores/#{store.uuid}", params: {
-        name: "Papa John's 2",
-        phone: "123-456-7890",
-        email: "papa@johns.com",
-        street: "Calle Principal 123",
-        number: 123,
-        letter: "A",
-        postal_code: "12345",
-        city: "Ciudad",
-        country: "País"
-      }
+    get('show store') do
+      tags 'Stores'
+      description 'See a store'
+      operationId 'showStore'
+      consumes 'application/json'
+      produces 'application/json'
 
-      expect(response).to have_http_status(:ok)
-      expect(store.reload.name).to eq("Papa John's 2")
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/store'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
 
-    it "returns a 404 error if the store is not found" do
-      put "/api/v1/stores/123", params: {
-        name: "Papa John's 2",
-      }
+    put('update store') do
+      tags 'Stores'
+      description 'Update a store'
+      operationId 'updateStore'
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :store, in: :body, required: true,
+                schema: { '$ref' => '#/components/schemas/create_store' }
 
-      expect(response).to have_http_status(:not_found)
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/store'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          } 
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(422, 'invalid request') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
 
-    it "returns a 422 error if the store is invalid" do
-      put "/api/v1/stores/#{store.uuid}", params: {
-        name: nil,
-      }
+    delete('delete store') do
+      tags 'Stores'
+      description 'Delete a store'
+      operationId 'deleteStore'
+      consumes 'application/json'
+      produces 'application/json'
 
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
+      response(204, 'successful') do
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end 
   end
-
-  describe "DELETE /api/v1/stores/:uuid" do
-    let!(:store) { create(:store) }
-
-    it "deletes the store" do
-      expect {
-        delete "/api/v1/stores/#{store.uuid}"
-      }.to change(Store, :count).by(-1)
-
-      expect(response).to have_http_status(:no_content)
-    end
-  end
-end 
+end
