@@ -201,4 +201,23 @@ RSpec.describe V1::StoresController, type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
-end 
+
+  describe "GET /api/v1/stores/:uuid/orders" do
+    let(:store) { create(:store) }
+    let!(:order) { create(:order, store: store) }
+
+    it "returns the orders of the store" do
+      get "/api/v1/stores/#{store.uuid}/orders" 
+  
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body)[0]["uuid"]).to eq(order.uuid)
+    end
+
+    it "returns a 404 error if the store is not found" do
+      get "/api/v1/stores/123/orders"
+
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+end

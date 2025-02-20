@@ -17,6 +17,7 @@ Rails.application.routes.draw do
           post :assign_products
           delete :unassign_products
           get :products
+          get :orders
         end
       end
       resources :products, param: :uuid

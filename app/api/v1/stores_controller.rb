@@ -1,6 +1,6 @@
 module V1
   class StoresController < ApiController
-    before_action :set_store, only: [:show, :destroy, :update, :assign_products, :unassign_products, :products]
+    before_action :set_store, only: [:show, :destroy, :update, :assign_products, :unassign_products, :products, :orders]
     def index
       render json: StoreBlueprint.render(Store.all)
     end
@@ -58,6 +58,10 @@ module V1
 
     def products
       render json: ProductBlueprint.render(@store.products)
+    end
+
+    def orders
+      render json: OrderBlueprint.render(@store.orders)
     end
 
     private

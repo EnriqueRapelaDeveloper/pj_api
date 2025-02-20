@@ -38,7 +38,8 @@ RSpec.configure do |config|
           assign_products: store_schema.dig('assign_products'),
           update_order: order_schema.dig('update_order'),
           order: order_schema.dig('order'),
-          create_order: order_schema.dig('create_order')
+          create_order: order_schema.dig('create_order'),
+          orders: order_schema.dig('orders')
         }
       },
       paths: {},
