@@ -23,7 +23,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:draft, :paid], to: :cancelled
+      transitions from: :draft, to: :cancelled
     end
   end
 
