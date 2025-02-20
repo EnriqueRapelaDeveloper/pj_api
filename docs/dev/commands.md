@@ -50,4 +50,4 @@
 
 - Run rspec without swagger documentation
 
-` bundle exec rspec --exclude-pattern "spec/requests/**/*_spec.rb"`
+`bundle exec rspec --exclude-pattern "spec/requests/**/*_spec.rb"`

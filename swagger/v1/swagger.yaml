@@ -207,7 +207,233 @@ components:
           type: string
           example: Product_uuid1,Product_uuid2,Product_uuid3
           description: Product uuids to assign separated by commas
+    update_order:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product_uuid:
+                type: string
+                example: UUID of the product
+              quantity:
+                type: integer
+                example: Quantity of the product
+    order:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: UUID of the order
+        total_price:
+          type: number
+          example: Total price of the order
+        status:
+          type: string
+          example: Status of the order
+        created_at:
+          type: datetime
+          example: Created at of the order
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                example: UUID of the product
+              name:
+                type: string
+                example: Name of the product
+              price:
+                type: number
+                example: Price of the product
+              quantity:
+                type: integer
+                example: Quantity of the product
+    create_order:
+      type: object
+      properties:
+        store_uuid:
+          type: string
+          example: UUID of the store
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product_uuid:
+                type: string
+                example: UUID of the product
+              quantity:
+                type: integer
+                example: Quantity of the product
 paths:
+  "/api/v1/orders":
+    post:
+      summary: Create an order
+      tags:
+      - Orders
+      description: Create an order
+      operationId: createOrder
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/order"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_order"
+        required: true
+  "/api/v1/orders/{uuid}":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show an order
+      tags:
+      - Orders
+      description: Show an order
+      operationId: showOrder
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/order"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+    put:
+      summary: Update an order
+      tags:
+      - Orders
+      description: Update an order
+      operationId: updateOrder
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/order"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_order"
+        required: true
+  "/api/v1/orders/{uuid}/pay":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Pay an order
+      tags:
+      - Orders
+      description: Pay an order
+      operationId: payOrder
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/order"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+  "/api/v1/orders/{uuid}/cancel":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Cancel an order
+      tags:
+      - Orders
+      description: Cancel an order
+      operationId: cancelOrder
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/order"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generic_error"
+  "/api/v1/orders/{uuid}/deliver":
+    parameters:
+    - name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Deliver an order
+      tags:
+      - Orders
+      description: Deliver an order
+      operationId: deliverOrder
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/order"
   "/api/v1/products":
     get:
       summary: show products
