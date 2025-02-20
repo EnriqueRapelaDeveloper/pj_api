@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "3426861d-82f4-440e-8f0d-6da6b79fe4ab",
+		"name": "PJ API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33299141"
+	},
+	"item": [
+		{
+			"name": "Stores",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/stores"
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tienda el Pepe\",\n    \"phone\": \"677582491\",\n    \"email\": \"kike@test.com\",\n    \"street\": \"Pedro de Molina\",\n    \"number\": \"13\",\n    \"letter\": \"A\",\n    \"postal_code\": \"45213\",\n    \"country\": \"España\",\n    \"city\": \"Sevilla\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/stores"
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/stores/349c4a1d-4044-4465-b041-b47c7203db97"
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{HOST}}/api/v1/stores/349c4a1d-4044-4465-b041-b47c7203db97"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tienda el Pepe1 actualizado\",\n    \"phone\": \"111111111\",\n    \"email\": \"kike@test1.com\",\n    \"street\": \"Pedro de Molinaer\",\n    \"number\": \"11\",\n    \"letter\": \"B\",\n    \"postal_code\": \"41213\",\n    \"country\": \"Españia\",\n    \"city\": \"Seville\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/stores/022e10e6-364c-42c0-86e2-409562b581e6"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_uuids\": \"0d9eb1f3-d8bf-4da3-b668-0e74c130fe31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/stores/636f5150-1b5e-4ae9-b6a3-28db94619a0f/assign_products"
+					},
+					"response": []
+				},
+				{
+					"name": "Unassign products",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_uuids\": \"69c73c23-cbdd-4890-a168-66398b329639, 0d9eb1f3-d8bf-4da3-b668-0e74c130fe31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/stores/636f5150-1b5e-4ae9-b6a3-28db94619a0f/unassign_products"
+					},
+					"response": []
+				},
+				{
+					"name": "Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/stores/636f5150-1b5e-4ae9-b6a3-28db94619a0f1/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/stores/636f5150-1b5e-4ae9-b6a3-28db94619a0f/orders"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pizza americana\",\n    \"sku\": \"Pepepep11e1\",\n    \"kind\": 1,\n    \"price\": 1999,\n    \"description\": \"Border rellenos\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/products/688c5f2b-457b-44f1-b938-0e88aa95034b"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pizza americana editada\",\n    \"sku\": \"ID-111\",\n    \"kind\": 0,\n    \"price\": 1999,\n    \"description\": \"Border rellenos editados\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/products/23e855e6-c364-43ae-ac5b-72a43683f83e"
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{HOST}}/api/v1/products/23e855e6-c364-43ae-ac5b-72a43683f83e"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Selects",
+			"item": [
+				{
+					"name": "Product kinds",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/selects/product_kinds"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "State changes",
+					"item": [
+						{
+							"name": "Pay",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{HOST}}/api/v1/orders/672dcd80-6b70-4c59-9038-1ca3957d7007/pay"
+							},
+							"response": []
+						},
+						{
+							"name": "Deliver",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{HOST}}/api/v1/orders/672dcd80-6b70-4c59-9038-1ca3957d7007/deliver"
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{HOST}}/api/v1/orders/4493e2bb-dcb0-48aa-b32a-c4ccbd88c514/cancel"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"store_uuid\": \"636f5150-1b5e-4ae9-b6a3-28db94619a0f\",\n  \"products\": [\n    {\n      \"product_uuid\": \"995a847a-1598-4b83-b632-d784cec11aa3\",\n      \"quantity\": 2\n    },\n    {\n      \"product_uuid\": \"0d9eb1f3-d8bf-4da3-b668-0e74c130fe31\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"products\": [\n    {\n      \"product_uuid\": \"995a847a-1598-4b83-b632-d784cec11aa3\",\n      \"quantity\": 8\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/v1/orders/36b87fde-7576-4b79-918d-66f767d89364"
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/v1/orders/36b87fde-7576-4b79-918d-66f767d89364"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
