@@ -24,4 +24,5 @@
 /config/credentials.yml.enc
 
 # Coverage
-coverage/
+coverage/*
+!coverage/index.html
