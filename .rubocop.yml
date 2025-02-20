@@ -27,6 +27,7 @@ AllCops:
     - 'spec/**/*'
     - 'config/initializers/*'
     - 'db/**/*'
+    - 'config/routes.rb'
 
 Metrics/AbcSize:
   Enabled: false
