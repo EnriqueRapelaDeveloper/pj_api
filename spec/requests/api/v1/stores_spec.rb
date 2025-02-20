@@ -307,4 +307,40 @@ RSpec.describe 'api/v1/stores', type: :request do
       end
     end
   end
+
+  path '/api/v1/stores/{uuid}/orders' do
+    parameter name: :uuid, :in => :path, :type => :string
+
+    get('show orders of store') do
+      tags 'Stores'
+      description 'See the orders of a store' 
+      operationId 'showOrdersOfStore'
+      consumes 'application/json'
+      produces 'application/json'
+
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/orders'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            } 
+          }
+        end
+        run_test!
+      end
+
+      response(404, 'not found') do
+        schema '$ref' => '#/components/schemas/generic_error'
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true) 
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end 
 end
